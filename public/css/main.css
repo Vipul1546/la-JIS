@@ -1,0 +1,70 @@
+
+.homebg{
+	background:linear-gradient(0deg,rgba(4, 255, 0, 0.33),rgba(0, 149, 255, 0.85)),url(http://journeyinshots.com/wp-content/uploads/2019/01/IMG_20181007_130002-01-1-1024x768.jpeg);
+	background-size:cover;
+}
+
+.homeBlock{
+	height: calc(100vh);
+	box-sizing: border-box;
+}
+
+.table  {
+	background: #fff ;
+}
+
+.be-block {
+	background: #4b93de;
+	color: #fff;
+	text-align: center;
+	border: 1px solid #fff;
+	height: 150px;
+	margin-top: 10px;
+	padding-top: 50px;
+}
+.be-block a {
+    color: #fff;
+}
+.navbar{margin-bottom: 10px}
+
+.navbar-brand{text-transform: capitalize;}
+a.navbar-brand.cNew {
+    border: 1px solid grey;
+    padding: 3px 5px;
+    border-radius: 5px;
+    color: #fff;
+    background: grey;
+}
+.container-fluid.globalNav {
+    width: 20%;
+    max-width: 30%;
+    float: left;
+    background: #fff;
+    height: calc(100vh);
+    padding: 0;
+    background: #484848;
+}
+.uper {
+    margin-top: 110px;
+    width: 79%;
+    display: inline-block;
+}
+a.nav-link {
+    color: #fff;
+}
+nav.nav.flex-column {
+    margin-top: 20px;
+}
+a.nav-link.be-back {
+    font-weight: bold;
+    box-shadow: 0px -1px 11px #333;
+}
+.fixText {
+    text-transform: capitalize;
+}
+
+.be-active{
+    border-left: 6px solid #fff;
+    background: #00000059;
+}
+.dropdown-menu{right: 0; left:auto;}
