@@ -5,6 +5,7 @@ use App\Post;
 use App\Taxonomy;
 use App\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @param $title
@@ -85,5 +86,29 @@ class Helper
             $user = USER::select($field)->where('id',$id)->get()->toArray()[0]['name'];
         }
         return $user;
+    }
+
+    public static function getUserRoles($id){
+        $roles = [
+            22 => 'SuperAdmin',
+            1 => 'Administrator',
+            2 => 'Author',
+            3 => 'Subscriber',
+            4 => 'Editor'
+        ];
+
+        return $roles[$id];
+    }
+
+    public static function getUserMeta($userId, $metaKey=''){
+        if($metaKey == '' && empty($metaKey)){
+            $users = DB::table('usermeta')->where('user_id', $userId)->get();
+        } else {
+            $users = DB::table('usermeta')->where([
+                        ['user_id', $userId],
+                        ['meta_key', $metaKey],
+                    ])->first();
+        }
+        return Helper::getUserRoles($users->meta_value);
     }
 }

@@ -45,7 +45,7 @@
 			<a class="nav-link be-image" href="{{ route('posts.index', 'type=image', false) }}"> Images </a>
 			<a class="nav-link be-video" href="{{ route('posts.index', 'type=video', false) }}"> Videos </a>	
 			<hr />
-			<a class="nav-link be-users" href="{{ route('users') }}"> Users </a>	
+			<a class="nav-link be-users" href="{{ route('users.index') }}"> Users </a>	
 		</nav>
 	</div>
 	@yield('content')

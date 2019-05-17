@@ -35,4 +35,4 @@ Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home');
 
-Route::get('/admin/users', [ 'as' => 'users', 'middleware' => ['auth'], 'uses' =>  'UserController@index']);
+Route::resource('/admin/users', 'UserController', ['middleware' => ['auth']]);

@@ -6,4 +6,11 @@
 4) Tag functionality creations
 5) Basic Setting like site logo, site details
 6) SEO functionality in post/video/image
-7) Author Listing
+7) Author Listing (DONE)
+
+
+
+
+
+status
+>> added usermeta table add fileds in tabel. Now i have to add user role and show on listing
