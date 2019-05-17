@@ -64,7 +64,7 @@ class UserController extends Controller
         $metaData = [
             'about' => $request->about,
             'userRole' => $request->userRole
-        ];
+        ]; 
 
         $user = User::create([
             'name' => $validatedData['name'],
