@@ -105,6 +105,7 @@ class PostController extends Controller
             'type'=> 'required'
         ]);
 
+        $validatedData['permalink'] = Helper::createSlug($request->permalink);
         Post::whereId($id)->update($validatedData);
         //echo '<pre>'; print_r($validatedData);die;
 

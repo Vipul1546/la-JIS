@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
  * @param $title
  * @param int $id
  * @return string
- * @throws \Exception
+ * @throws \Exception 
  */
 
 class Helper
@@ -94,7 +94,7 @@ class Helper
             1 => 'Administrator',
             2 => 'Author',
             3 => 'Subscriber',
-            4 => 'Editor'
+            4 => 'Editor',
         ];
 
         return $roles[$id];
@@ -103,12 +103,14 @@ class Helper
     public static function getUserMeta($userId, $metaKey=''){
         if($metaKey == '' && empty($metaKey)){
             $users = DB::table('usermeta')->where('user_id', $userId)->get();
+            return $users;            
         } else {
             $users = DB::table('usermeta')->where([
                         ['user_id', $userId],
                         ['meta_key', $metaKey],
                     ])->first();
+            if(empty($users->meta_value)) return $users = Helper::getUserRoles('3');
+            return Helper::getUserRoles($users->meta_value);
         }
-        return Helper::getUserRoles($users->meta_value);
     }
 }

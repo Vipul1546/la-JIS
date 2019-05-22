@@ -61,16 +61,17 @@ class UserController extends Controller
             'userRole' => 'required'
         ]);
 
-        $metaData = [
-            'about' => $request->about,
-            'userRole' => $request->userRole
-        ]; 
-
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
         ]);
+
+        $metaData = [
+            'about' => $request->about,
+            'userRole' => $request->userRole,
+            'accessToken' => $user->createToken('AppName')->accessToken
+        ]; 
 
         foreach ($metaData as $key => $value) {
             $id = DB::table('usermeta')->insertGetId(
@@ -107,12 +108,24 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $user = User::select('id', 'name', 'email')->where('id',$id)->get();
+        $meta = DB::table('usermeta')->where('user_id',$id)->get();
+        $userMeta =[];
+        foreach ($meta as $key => $value) {
+            $userMeta[$value->meta_key] = $value->meta_value;
+        }
+        $userMetaData = [];
+        $userMetaData['about'] = (!isset($userMeta['about']) && empty($userMeta['about'])) ? 'No Data' : $userMeta['about'];
+        $userMetaData['userRole'] = (!isset($userMeta['userRole']) && empty($userMeta['userRole'])) ? 'No Data' : $userMeta['userRole'];
+        $userMetaData['accessToken'] = (!isset($userMeta['accessToken']) && empty($userMeta['accessToken'])) ? 'No Data' : $userMeta['accessToken']; 
+
+        //Helper::p_deb($userMetaData); die;
         // $post = Post::findOrFail($id);
         // $catList['catData'] = Helper::getTaxonomyListing('category'); 
         // $authorList['authorData'] = Helper::getAuthorListing();
         // $data = array_merge_recursive($catList, $authorList);
         // //Helper::print_debug($authorList['authorData']);
-        // return view('backend.post.edit', compact('post'))->with('data', $data);
+        return view('backend.user.edit', compact('user'))->with('userMeta', $userMetaData);
     }
 
     /**
@@ -153,6 +166,23 @@ class UserController extends Controller
         // $postType = Helper::getPostTypeFromID($id);
         // $post->delete();
         // return redirect()->route('posts.index', ['type'=> $postType])->with('sucess','Post Successfully deleted');
+    }
+
+    public function generateAccessTocken($userId){
+        $user = User::find($userId);
+        //$token = $user->createToken('Story', ['story-detail'])->accessToken;
+
+        Helper::p_deb($user);
+
+        // $id = DB::table('usermeta')->insertGetId(
+        //         [
+        //             'user_id' => $userId, 
+        //             'meta_key' => 'accessToken',
+        //             'meta_value' => $token,
+        //             'created_at' => date('Y-m-d H:i:s'),
+        //             'updated_at' => date('Y-m-d H:i:s')
+        //         ]
+        //     );
     }
 
 }
