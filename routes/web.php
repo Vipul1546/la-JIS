@@ -30,6 +30,10 @@ Route::resource('/admin/taxonomies', 'TaxonomyController', [
 
 Route::get('/admin/taxonomies/{post_type}/{type}', ['as' => 'indexx','middleware' => ['auth'], 'uses' => 'TaxonomyController@indexx']);
 
+Route::get('/admin/users/{userID}/generateAccessToken', ['as' => 'generateAccessToken','middleware' => ['auth'], 'uses' => 'UserController@generateAccessToken']);
+
+//Route::post('generateAccessToken', 'UserController@generateAccessToken');
+
 Auth::routes();
 
 

@@ -113,4 +113,12 @@ class Helper
             return Helper::getUserRoles($users->meta_value);
         }
     }
+
+    public static function abcd(){
+        //$users = User::get();
+        //Helper::p_deb(compact('users'));
+       // return view('backend.user.index', compact('users'));
+
+        return 'hello';
+    }
 }

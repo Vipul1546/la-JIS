@@ -168,21 +168,22 @@ class UserController extends Controller
         // return redirect()->route('posts.index', ['type'=> $postType])->with('sucess','Post Successfully deleted');
     }
 
-    public function generateAccessTocken($userId){
+    public function generateAccessToken($userId){
         $user = User::find($userId);
-        //$token = $user->createToken('Story', ['story-detail'])->accessToken;
+        $token = $user->createToken('Story')->accessToken;
 
-        Helper::p_deb($user);
-
-        // $id = DB::table('usermeta')->insertGetId(
-        //         [
-        //             'user_id' => $userId, 
-        //             'meta_key' => 'accessToken',
-        //             'meta_value' => $token,
-        //             'created_at' => date('Y-m-d H:i:s'),
-        //             'updated_at' => date('Y-m-d H:i:s')
-        //         ]
-        //     );
+        //Helper::p_deb($token);
+        //echo "asdf"; die;
+        $id = DB::table('usermeta')->insertGetId(
+                [
+                    'user_id' => $userId, 
+                    'meta_key' => 'accessToken',
+                    'meta_value' => $token,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]
+            );
+        return redirect('/admin/users/'.$userId.'/edit');
     }
-
+    
 }

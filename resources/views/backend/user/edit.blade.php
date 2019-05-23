@@ -39,11 +39,17 @@
                 <label for="tag">Confirm Password</label>
                 <input type="confirmPassword" class="form-control" name="confirmPassword" autocomplete="off"/>
             </div>
+                  @if(Auth::user()->id == 1)
             <div class="form-group">
                 <label for="tag">Access Tocken</label>
-                <a href="{{ route('users.generateAccessTocken') }}" class="accessTockenGen">Generate Access Token</a>
+                 <!--  <form action="{{ route('generateAccessToken' , ['userID' => $user[0]->id]) }}" method="post">
+                    @csrf
+                    <button class="btn btn-danger" type="submit">Generate AccessToken</button>
+                  </form> -->
+                  <a href="{{ route('generateAccessToken' , ['userID' => $user[0]->id]) }}" >Generate Access Token</a>
                 <textarea class="form-control" name="accessTocken" rows="10" disabled>{{ $userMeta['accessToken'] }}</textarea>
             </div>
+            @endif
              <div class="form-group">
             <label for="category">User Role</label>
               <select class="form-control" id="userRole" name="userRole">
