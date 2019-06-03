@@ -47,9 +47,12 @@ class ApiAuthController extends Controller
 		return response()->json(['success' => $user], $this->successStatus); 
  	}
 
-    public function postList(){
-    	$postList = Post::where('type', '=', 'post')->get();
-    	//return "die";
+    public function postList(Request $request){
+    	$cat = (!empty($request->get('category'))) ? $request->get('category') : 'undefined';
+    	$postList = Post::where([
+    						['type', '=', 'post'],
+    						['category', '=', $cat]
+						])->get();
     	return response()->json(['posts' => $postList], $this->successStatus);
     }
 }

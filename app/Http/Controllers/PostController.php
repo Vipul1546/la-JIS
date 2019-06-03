@@ -26,9 +26,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $catList = Helper::getTaxonomyListing('category'); 
+        $fullUrl = $request->fullUrl();
+        $type = !empty(explode('=', $fullUrl)[1]) ? explode('=', $fullUrl)[1] : 'post';
+        $catList = Helper::getTaxonomyListing('category', $type); 
+        if($type == 'page') return view('backend.post.page.create')->with('catList', $catList);
         return view('backend.post.create')->with('catList', $catList);
     }
 
@@ -40,6 +43,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $fullUrl = $request->fullUrl();
+        $type = !empty(explode('=', $fullUrl)[1]) ? explode('=', $fullUrl)[1] : 'post';
+        if($type == 'page'){
+            echo '<pre>'; print_r($validatedData);die;
+        }
         $validatedData = $request->validate([
             'title' => 'required',
             'post_author' => 'required',
@@ -52,7 +60,6 @@ class PostController extends Controller
 
 
         $validatedData['permalink'] = Helper::createSlug($request->title);
-        //echo '<pre>'; print_r($validatedData);die;
 
         $post = Post::create($validatedData);
 
@@ -79,7 +86,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $catList['catData'] = Helper::getTaxonomyListing('category'); 
+        $postType = Helper::getPostTypeFromID($id);
+        $catList['catData'] = Helper::getTaxonomyListing('category', $postType); 
         $authorList['authorData'] = Helper::getAuthorListing();
         $data = array_merge_recursive($catList, $authorList);
         //Helper::print_debug($authorList['authorData']);

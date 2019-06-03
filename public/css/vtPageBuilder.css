@@ -1,0 +1,141 @@
+.model{
+    color: #333;
+}
+
+
+
+
+
+
+
+#playArea{
+    min-height: 300px;
+    border: 1px solid grey;
+    padding: 5px; 
+    padding-bottom: 50px;
+    background: lightgrey;
+}
+#playArea .widget {
+    max-width: inherit;
+    margin: 0;
+    margin-bottom: 10px;
+    box-shadow: 1px 4px 9px -3px grey;
+}
+#playArea .vt-row {
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+#playArea .innerPlayArea {
+    min-height: 100px;
+    padding: 5px 5px 20px 5px;
+    margin-bottom: 17px;    
+}
+#playArea .vt-WidgetHeading.row {
+    background: #3883f5;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+    color: #fff;
+    padding: 10px;
+    margin: 0 0 10px 0px;
+}
+#playArea .drag{
+    padding: 0;
+}
+#playArea .dropBlock{
+    padding: 0
+}
+
+
+
+
+
+
+
+.widgetStore .whide{
+    display: none;
+}
+#widgetStore .widget{
+    max-width: 25%;
+    padding: 10px;
+}
+#widgetStore{
+    margin-bottom: 50px;
+}
+#widgetStore .afterDrop{
+    display: none;
+}
+
+
+
+
+
+.hide{
+    display: none;
+}
+.vt-WidgetHeading{
+    color: #fff;
+}
+.widget {
+    max-width: 25%;
+    background: blue;
+
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-right: 5px
+}
+.editBox {
+    display: inline-block;
+    /*width: 29%;*/
+}
+.displayHeading {
+    display: inline-block;
+    /*width: 70%;*/
+}
+.vt-close {
+    background: transparent;
+    border: none;
+    color: red;
+    font-size: 19px;
+}
+.modal-header {
+    color: #fff;
+    background: #3883f5;
+    padding: 5px 21px;
+}
+.modal-footer {
+    padding: 5px;
+}
+button.btn.btn-danger {
+    padding: 3px 16px;
+}
+vtPageBuilder{
+    display: block;
+    background: #4db78638;
+    border-radius: 10px;
+    padding: 15px 0px;
+}
+.dropArea {
+    background: lightgrey;
+}
+.ui-state-hover{
+    background: #a0c6ff !important;
+    box-shadow: 2px 2px 9px 0px #8080806b;
+    transition: all .3s ease-in-out;
+    transform: scale(1.01);
+}
+.tranparentBG {
+    color: #fff;
+    background-color: transparent;
+    border:none;
+}
+.fixTop{
+    position: fixed;
+    top: 0px;
+    background: #fff;
+    width: 971px;
+    padding: 10px;
+    transition: all .3s ease-in-out;
+    z-index: 99999;
+    box-shadow: 1px 1px 11px 2px grey;
+}

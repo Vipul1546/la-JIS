@@ -18,10 +18,12 @@ var getUrlParameter = function getUrlParameter(sParam) {
 jQuery(document).ready(function(){
 	var postType = getUrlParameter('type');
 	jQuery('.be-'+postType).addClass('be-active');
-});
 
-jQuery('#dropdownMenu2').click(function (){
-    jQuery('.dropdown .dropdown-menu').toggle();
+
+  jQuery('#dropdownMenu2').click(function (){
+      jQuery('.dropdown .dropdown-menu').toggle();
+  });
+
 });
 
 

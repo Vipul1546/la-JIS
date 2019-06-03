@@ -64,10 +64,13 @@ class Helper
         return $taxonomyData;    
     }
 
-    public static function getTaxonomyListing($taxonomy = 'category'){
+    public static function getTaxonomyListing($taxonomy = 'category', $post_type){
         $count = Taxonomy::where('taxonomy', $taxonomy)->count(); //get tax count
         if($count == 0) return 'No data found';
-        $taxonomyData['list'] = Taxonomy::select('title','slug')->where('taxonomy',$taxonomy)->distinct()->get()->toArray();
+        $taxonomyData['list'] = Taxonomy::select('title','slug')->where([
+            ['taxonomy',$taxonomy],
+            ['post_type',$post_type],
+        ])->distinct()->get()->toArray();
         $taxonomyData['count'] = $count;
         return $taxonomyData;    
     }
@@ -114,11 +117,11 @@ class Helper
         }
     }
 
-    public static function abcd(){
+    public static function generateAccessToken($userID){
         //$users = User::get();
         //Helper::p_deb(compact('users'));
        // return view('backend.user.index', compact('users'));
 
-        return 'hello';
+        return $userID;
     }
 }
