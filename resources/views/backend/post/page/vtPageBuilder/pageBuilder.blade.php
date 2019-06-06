@@ -15,8 +15,8 @@
 	                        </div>
 	                        <div class="modal-body">
 	                             <div class="row">
-							    	@include('backend.post.page.vtPageBuilder.widgets.row')
-							    	@include('backend.post.page.vtPageBuilder.widgets.textHeading')
+							    	@include('backend.post.page.vtPageBuilder.widgets.vt-row')
+							    	@include('backend.post.page.vtPageBuilder.widgets.vt-textHeading')
 							    </div>
 	                        </div>
 	                        <div class="modal-footer">
@@ -30,6 +30,6 @@
     </div>
 
 	<div id="playArea" class="playArea container">
-	       
+      	
 	</div> 
 </vtPageBuilder>

@@ -139,3 +139,6 @@ vtPageBuilder{
     z-index: 99999;
     box-shadow: 1px 1px 11px 2px grey;
 }
+.switchContent{
+    padding: 0px 0px 10px 0px;
+}

@@ -3,7 +3,7 @@
     * WIDGET NAME: ROW WIDGET 
     *
 -->
-            <div id="vt-row" class="widget vt-row col drag" widgetName="Full Row">
+            <div id="vt-row" class="widget vt-row col drag" widgetName="vt-row">
                 <div class="vt-WidgetHeading row">
                     <div class="displayHeading col-sm-8">
                         Add Row
@@ -92,6 +92,7 @@
                                 <input class="selector" type="hidden" name="selector" value="">
                                 <input class="widgetName" type="hidden" name="widgetName" value="">
                                 <input class="widgetNumber" type="hidden" name="widgetNumber" value="">
+                                <input class="parentID" type="hidden" name="parentID" value="">
                                 <div id="vt-textHeadingExpand">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -108,7 +109,7 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" aria-label="Checkbox for following text input" name="disableFrontend">
+                                                <input type="checkbox" id="disableFrontend" aria-label="Checkbox for following text input" name="disableFrontend">
                                             </div>
                                         </div>
                                         <span class="input-group-text">Hide in frontend</span>

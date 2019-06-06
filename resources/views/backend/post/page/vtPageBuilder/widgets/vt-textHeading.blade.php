@@ -3,7 +3,7 @@
     * WIDGET NAME: HEADING WIDGET 
     *
 -->
-            <div id="vt-textHeading" class="widget vt-textHeading col" widgetName="Text Heading">
+            <div id="vt-textHeading" class="widget vt-textHeading col" widgetName="vt-textHeading">
                 <div class="vt-WidgetHeading row">
                     <div class="displayHeading col-sm-8">
                         Text Heading
@@ -27,7 +27,10 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
+                                <input class="selector" type="hidden" name="selector" value="">
                                 <input class="widgetName" type="hidden" name="widgetName" value="">
+                                <input class="widgetNumber" type="hidden" name="widgetNumber" value="">
+                                <input class="parentID" type="hidden" name="parentID" value="">
                                 <div id="vt-textHeadingExpand">
                                     <div class="input-group input-group-sm mb-3">
                                         <div class="input-group-prepend">

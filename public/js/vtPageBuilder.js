@@ -4,7 +4,6 @@ $('document').ready(function(){
     }
 
     var widgetStoreTop = $('.widgetStore').offset().top;
-    console.log(widgetStoreTop);
      $(window).scroll(function(){
      	if($(this).scrollTop()>=widgetStoreTop){
         	$('.widgetStore').addClass('fixTop').slideDown();
@@ -23,6 +22,8 @@ $('document').ready(function(){
 
             this.counter = 0;
             this.playAreaCounter = 0;
+            this.tree = '';
+            this.lastTree = '';
         }
 
         doAlert(){
@@ -38,11 +39,11 @@ $('document').ready(function(){
                 snap: true,
                 zIndex: 100,
                 refreshPositions: true,
-                drag: function( event, ui ) { console.log('asdf');
+                drag: function( event, ui ) { 
                 	$('#myModalwidgetStore').css('top','-10000px');
                 	$('.modal-backdrop').remove();
                 },
-                stop: function( event, ui ) { console.log('asdf');
+                stop: function( event, ui ) { 
                 	$('#myModalwidgetStore').css('top','inherit');
                 	$('#myModalwidgetStore').modal('hide');
                 },
@@ -65,13 +66,17 @@ $('document').ready(function(){
                     var target = $(event.target);
                     var dropped = $(ui.draggable).clone().appendTo(target);
 
+                    
+
                     /* Adding Unique Id to dropped widget */
                     var id = dropped.attr('id')+'-'+dropEleName+'-'+self.counter;
                     dropped.addClass(id);
                     dropped.addClass('redrag');
                     dropped.find('.vt-close').attr('parentClass',id);
-                    dropped.attr('widgetNumber',dropped.attr('id')+'-'+self.counter);
-                    self.counter++;
+                    dropped.attr('widgetNumber',dropped.attr('id')+self.counter);
+                    dropped.attr('parent', target.attr('pid'));
+
+                    
 
                     /* Setting up edit model popup */
                     var modelID = id + '-model';
@@ -84,10 +89,50 @@ $('document').ready(function(){
                     dropped.find('.widgetName').val(widgetName);
                     var widgetNumber = dropped.attr('widgetNumber');
                     dropped.find('.widgetNumber').val(widgetNumber);
+                    dropped.find('.parentID').val(target.attr('pid'));
+                    dropped.find('.selector').val(target.attr('id')); //setting droppable area value perticular widget
+
+                    /*gennerate Input tree*/
+                    if(typeof target.attr('pid') != 'undefined' && target.attr('pid') != self.lastTree){
+                    	self.tree += ','+ target.attr('pid');
+						while(self.tree.charAt(0) === ','){
+					 		self.tree = self.tree.substr(1);
+						}
+                    }
+                 	
 
                     dropped.attr('id',widgetNumber); //setting widget number as widget ID
+                    dropped.find('.innerPlayArea').attr('pid',dropped.attr('id')); //setting widget id to dropArea
 
-                    console.log({widgetName,widgetNumber});
+
+
+                    /* setting unique form values name */
+                    var inputName = dropped.find('input');
+                    var tree = '';
+                    var parentTree =  self.tree.split(',');
+                	for (var i = 0; i < parentTree.length; i++) {
+                    		if(parentTree[i] != ''){
+                    			tree +=  '['+parentTree[i]+']';
+                		}
+                	}
+                    $.each( inputName, function( key, value ) {
+                    	var UID = $(this).attr('name');
+                    	//console.log(tree);
+                    	$(this).attr('id', UID+self.counter);
+                    	$(this).attr('name', 'widgetData['+widgetName+self.counter+']['+UID+']');
+                    });
+                    // $.each( inputName, function( key, value ) {
+                    // 	var UID = $(this).attr('name');
+                    // 	//console.log(tree);
+                    // 	$(this).attr('id', UID+self.counter);
+                    // 	if(widgetName == 'vt-row'){
+                    // 		widgetName = widgetName + '-'; 
+                    // 	}
+                    // 	$(this).attr('name', widgetName+self.counter+'['+UID+']');
+                    // });
+                   
+                    self.lastTree = target.attr('pid');
+                    self.counter++;
 
 
                     /* Close Widget*/
@@ -106,7 +151,6 @@ $('document').ready(function(){
                             var widgetName = $('#'+modelID+' .widgetName').val();
                             var widgetNumber = $('#'+modelID+' .widgetNumber').val();
                             var rowColumnCount = $('#'+widgetNumber+' #rowColumnCount').val();
-                            console.log([modelID, widgetName, widgetNumber, rowColumnCount]);
                            $('#'+widgetNumber+' .dropBlock .row').hide();
                            $('#'+widgetNumber+' .'+rowColumnCount+'Row').css('display','flex');
                     });
@@ -129,8 +173,6 @@ $('document').ready(function(){
 
                     }
 
-
-
                     /*
                     *
                     */
@@ -140,12 +182,9 @@ $('document').ready(function(){
                         $.each( newdropEleKey, function( key, value ) {
                         	var playAreaId = 'playArea'+self.playAreaCounter++;
 					  		$(this).attr('id', playAreaId);
-					  		dropped.find('.selector').val(target.attr('id')); //setting droppable area value perticular widget
 					  		self.makeDroppable($(this));
 				  		 	$( this).droppable( "option", "greedy", true );
 						});
-                        //newdropEleKey.attr('id', playAreaId);
-                        //self.makeDroppable('#'+playAreaId);
                        
                         self.playAreaCounter++;
                     }

@@ -8,6 +8,8 @@
 6) SEO functionality in post/video/image
 7) Author Listing (DONE)
 
+8) need to fix category issue. remove category from post table and add post id with cat id in post meta
+
 
 
 
